@@ -1,0 +1,17 @@
+.ShopCart {
+  margin-left: 50px;
+  margin-top: 10px;
+}
+.MuiPaper-root.MuiCard-root.makeStyles-root-5.MuiPaper-elevation1.MuiPaper-rounded {
+  width: 500px;
+}
+.ShopCart h2 {
+  text-align: center;
+  margin-top: 0;
+}
+.cards:nth-child(3) {
+  border-top: 1px solid #000;
+}
+.MuiCardActions-root.MuiCardActions-spacing {
+  justify-content: center;
+}

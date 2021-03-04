@@ -1,0 +1,28 @@
+.cards {
+  display: flex;
+  justify-content: space-between;
+}
+.cart_wrapper {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.cart_wrapper_price {
+  width: 20%;
+}
+.cart_wrapper_amount,
+.cart_wrapper_price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+.cart_wrapper_remove {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 20px;
+}

@@ -1,0 +1,30 @@
+.MuiPaper-root.MuiCard-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded {
+  padding: 5px 5px 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.MuiCardMedia-root.makeStyles-cover-4 {
+  width: 98px;
+}
+.MuiTypography-root.MuiTypography-subtitle1.MuiTypography-colorTextSecondary,
+.MuiTypography-root.MuiTypography-h5 {
+  text-align: left;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textSizeSmall.MuiButton-sizeSmall.card_order {
+  height: 30px;
+  background: #ccc;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  border-radius: 3px;
+  padding: 20px 5px;
+  cursor: pointer;
+}
+.MuiTypography-root.card_order:hover {
+  background: rgb(156, 155, 155);
+}
+.MuiTypography-root.card_order:active {
+  box-shadow: inset 0 0 3px #000;
+}
