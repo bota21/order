@@ -1,11 +1,18 @@
-.MuiPaper-root.MuiCard-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded {
-  padding: 5px 5px 5px 20px;
+.MuiPaper-root.MuiCard-root.makeStyles-root-4.MuiPaper-elevation1.MuiPaper-rounded {
+  padding: 5px;
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
 .MuiCardMedia-root.makeStyles-cover-4 {
   width: 98px;
+}
+.MuiCardContent-root.makeStyles-content-6 {
+  margin-right: 120px;
+}
+.MuiCardMedia-root.makeStyles-cover-7 {
+  width: 100px;
+  background-size: 100%;
 }
 .MuiTypography-root.MuiTypography-subtitle1.MuiTypography-colorTextSecondary,
 .MuiTypography-root.MuiTypography-h5 {

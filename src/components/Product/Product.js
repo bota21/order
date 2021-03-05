@@ -36,17 +36,16 @@ const Product = (props) => {
       />
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography variant='subtitle1' color='textSecondary'>
+          <Typography component='h5' variant='h5'>
             {props.title}
           </Typography>
-          <Typography component='h5' variant='h5'>
+          <Typography variant='subtitle1' color='textSecondary'>
             KZT {props.price}
           </Typography>
         </CardContent>
       </div>
-      <Button size='small' className='card_order'>
-        {" "}
-        <AddShoppingCart /> Add to card
+      <Button size='small' className='card_order' onClick={props.addProduct}>
+        <AddShoppingCart/> Add to card
       </Button>
     </Card>
   );

@@ -9,8 +9,11 @@
   text-align: center;
   margin-top: 0;
 }
-.cards:nth-child(3) {
+.cards:last-child {
   border-top: 1px solid #000;
+}
+.cards:last-child h4{
+  margin: 10px 0;
 }
 .MuiCardActions-root.MuiCardActions-spacing {
   justify-content: center;
