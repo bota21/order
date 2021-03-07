@@ -24,28 +24,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Product = (props) => {
+const Product = ({ image, title, price, type, addProduct }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.cover}
-        image={props.image}
-        title={props.title}
-      />
+      <CardMedia className={classes.cover} image={image} title={title} />
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component='h5' variant='h5'>
-            {props.title}
+            {title}
           </Typography>
           <Typography variant='subtitle1' color='textSecondary'>
-            KZT {props.price}
+            KZT {price}
           </Typography>
         </CardContent>
       </div>
-      <Button size='small' className='card_order' onClick={props.addProduct}>
-        <AddShoppingCart/> Add to card
+      <Button
+        size='small'
+        className='card_order'
+        onClick={() => addProduct(type)}>
+        <AddShoppingCart /> Add to card
       </Button>
     </Card>
   );

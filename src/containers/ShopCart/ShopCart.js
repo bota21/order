@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import "./ShopCart.css";
+import { PRODUCT_PRICES } from "../../prices";
+import {
+  removeIngridient,
+  changePurchasing,
+  placeOrder,
+  closeModal,
+} from "../../store/Actions/shopActions";
+import Modal from "../../components/UI/Modal";
+import ContactData from "../ContactData/ContactData";
 import ShopCartList from "../../components/ShopCartList/ShopCartList";
-import { useSelector } from "react-redux";
+import "./ShopCart.css";
 
 const useStyles = makeStyles({
   root: {
@@ -19,63 +28,89 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
 });
-const submitOrder = (e) => {
-  e.preventDefault();
-};
 
 const ShopCart = () => {
   const classes = useStyles();
-  const products = useSelector((state) => state.order.products);
+  const dishes = useSelector((state) => state.shop.dishes);
   const delivery = useSelector((state) => state.shop.delivery);
-  const total = useSelector((state) => state.shop.total);
+  const total = useSelector((state) => state.shop.totalPrice);
   const purchasing = useSelector((state) => state.shop.purchasing);
+  const openModal = useSelector((state) => state.shop.openModal);
+  const dispatch = useDispatch();
+  const dishesKeys = Object.keys(dishes);
+  const dishList = [];
 
-  const productKeys = Object.keys(products);
-  const prodList = [];
+  const deleteDish = (ingName) => {
+    dispatch(removeIngridient(ingName));
+  };
+  useEffect(() => {
+    console.log(dishes);
+  }, [dishes]);
 
-  productKeys.forEach((ingKeys) => {
-    const amount = products[ingKeys];
-    console.log(amount.product);
+  if (
+    dishes.Pasta === 0 &&
+    dishes.Caesar === 0 &&
+    dishes.Focaccia === 0 &&
+    dishes.Lemonade === 0
+  ) {
+    dispatch(changePurchasing(true));
+  }
+
+  dishesKeys.forEach((ingKeys) => {
+    const amount = dishes[ingKeys];
     for (let i = 0; i < amount; i++) {
-      prodList.push(
+      dishList.push(
         <ShopCartList
           key={ingKeys + i}
-          type={amount.product}
-          title={amount.product}
+          type={ingKeys}
+          title={ingKeys}
+          amount={dishes[ingKeys]}
+          price={PRODUCT_PRICES[ingKeys]}
+          remove={deleteDish}
         />
       );
     }
   });
 
+  const orderDishes = () => {
+    dispatch(placeOrder());
+  };
+  const closeWindow = () => {
+    dispatch(closeModal());
+  };
   return (
-    <form onSubmit={submitOrder}>
-      <div className='ShopCart'>
-        <Card className={classes.root}>
-          <CardContent>
-            <h2>Cart</h2>
+    <div className='ShopCart'>
+      <Card className={classes.root}>
+        <CardContent>
+          <h2>Cart</h2>
 
-            {prodList}
-            {/* <ShopCartList type='Focaccia'price='150'amount='1'/>
-            <ShopCartList type='Pizza'price='150'amount='1'/>
-            <ShopCartList type='Pizza'price='150'amount='1'/> */}
+          {dishList}
 
-            <div className='cards'>
-              <div className='cart_wrapper'>
-                <h4>Delivery</h4>
-                <h4>Total</h4>
-              </div>
-              <div className='cart_wrapper_price'>
-                <h4>{delivery}</h4>
-                <h4>{total}</h4>
-              </div>
+          <div className='cards'>
+            <div className='cart_wrapper'>
+              <h4>Delivery</h4>
+              <h4>Total</h4>
             </div>
-          </CardContent>
-          <CardActions>
-            <Button size='small' disabled={purchasing}>Place order</Button>
-          </CardActions>
-        </Card>
-      </div>
-    </form>
+            <div className='cart_wrapper_price'>
+              <h4>
+                {delivery} <span>KZT</span>
+              </h4>
+              <h4>
+                {total} <span>KZT</span>
+              </h4>
+            </div>
+          </div>
+        </CardContent>
+        <CardActions>
+          <Button size='small' disabled={purchasing} onClick={orderDishes}>
+            Place order
+          </Button>
+        </CardActions>
+      </Card>
+      <Modal open={openModal} title='Your Order'>
+        <ContactData close={closeWindow} />
+      </Modal>
+    </div>
   );
 };
 

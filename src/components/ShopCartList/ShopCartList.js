@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button";
 import "./ShopCartList.css";
 
-const OrderList = ({ type, amount, price, remove }) => {
+const ShopCartList = ({ type, amount, price, remove }) => {
   let renderListProducts = () => {
     return (
       <div className='cards'>
@@ -12,10 +12,13 @@ const OrderList = ({ type, amount, price, remove }) => {
           <h4>x{amount}</h4>
         </div>
         <div className='cart_wrapper_price'>
-          <h4>{price}</h4>
+          <h4>
+            {price}
+            <span> KZT</span>
+          </h4>
         </div>
         <div className='cart_wrapper_remove'>
-          <Button onClick={remove}>-</Button>
+          <Button onClick={() => remove(type)}>-</Button>
         </div>
       </div>
     );
@@ -34,4 +37,4 @@ const OrderList = ({ type, amount, price, remove }) => {
       return null;
   }
 };
-export default OrderList;
+export default ShopCartList;
