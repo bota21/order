@@ -37,8 +37,8 @@ const ShopCart = () => {
   const purchasing = useSelector((state) => state.shop.purchasing);
   const openModal = useSelector((state) => state.shop.openModal);
   const dispatch = useDispatch();
-  const dishesKeys = Object.keys(dishes);
-  const dishList = [];
+  const productName = Object.keys(dishes);
+  const productAmount = Object.values(dishes);
 
   const deleteDish = (ingName) => {
     dispatch(removeIngridient(ingName));
@@ -53,22 +53,34 @@ const ShopCart = () => {
     dispatch(changePurchasing(true));
   }
 
-  dishesKeys.forEach((ingKeys) => {
-    const amount = dishes[ingKeys];
-    for (let i = 0; i < amount; i++) {
-      if(ingKeys) {
-        dishList.push(
-          <ShopCartList
-            key={ingKeys + i}
-            type={ingKeys}
-            title={ingKeys}
-            amount={dishes[ingKeys]}
-            price={PRODUCT_PRICES[ingKeys]}
-            remove={deleteDish}
-          />
-        );
-      }      
+  const productObj = function (product, amount) {
+    var result = [];
+    for (var i = 0; i < product.length; i++) {
+      const data = {
+        product: product[i],
+        amount: amount[i],
+        price: PRODUCT_PRICES[product[i]],
+      };
+      result.push(data);
     }
+    return result;
+  };
+  const dishList = productObj(productName, productAmount);
+
+  const renderList = dishList.map((item) => {
+    if (item.amount !== 0) {
+      return (
+        <ShopCartList
+          key={item.product}
+          type={item.product}
+          title={item.product}
+          amount={item.amount}
+          price={item.price}
+          remove={deleteDish}
+        />
+      );
+    }
+    return null
   });
 
   const orderDishes = () => {
@@ -84,7 +96,7 @@ const ShopCart = () => {
         <CardContent>
           <h2>Cart</h2>
 
-          {dishList}
+          {renderList}
 
           <div className='cards'>
             <div className='cart_wrapper'>
