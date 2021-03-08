@@ -25,7 +25,7 @@ const ShopCartList = ({ type, amount, price, remove }) => {
   };
 
   switch (type) {
-    case "Pizza":
+    case "Pasta":
       return renderListProducts();
     case "Caesar":
       return renderListProducts();

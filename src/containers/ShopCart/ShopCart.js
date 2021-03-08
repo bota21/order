@@ -65,8 +65,9 @@ const ShopCart = () => {
     }
     return result;
   };
-  const dishList = productObj(productName, productAmount);
 
+  const dishList = productObj(productName, productAmount);
+  console.log(dishList);
   const renderList = dishList.map((item) => {
     if (item.amount !== 0) {
       return (
@@ -80,7 +81,7 @@ const ShopCart = () => {
         />
       );
     }
-    return null
+    return null;
   });
 
   const orderDishes = () => {

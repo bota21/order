@@ -14,7 +14,7 @@
 }
 .cart_wrapper_amount,
 .cart_wrapper_price {
-  width: 100px;
+  width: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
