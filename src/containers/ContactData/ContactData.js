@@ -13,15 +13,14 @@ import OrderSummary from "../../components/OrderSummary/OrderSummary";
 
 export default function ContactData({ close }) {
   const dispatch = useDispatch();
-  const { dishes, totalPrice, delivery } = useSelector((state) => {
+  const { dishes, totalPrice, delivery, isLoading } = useSelector((state) => {
     return {
       dishes: state.shop.dishes,
       totalPrice: state.shop.totalPrice,
       delivery: state.shop.delivery,
-      // isLoading: state.shop.isLoading,
+      isLoading: state.shop.isLoading,
     };
   });
-  const isLoading = useSelector(state => state.shop.isLoading)
   const [data, setData] = useState({
     name: "",
     phone: "",

@@ -34,7 +34,7 @@ const sendOrderSuccess = () => {
   return { type: SEND_ORDER };
 };
 const sendOrderError = error => {
-  return { type: SEND_ORDER };
+  return { type: SEND_ORDER, error };
 };
 
 export const sendOrderProducts = (data) => {

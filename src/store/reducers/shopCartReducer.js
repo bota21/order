@@ -25,7 +25,7 @@ const initialState = {
   isLoading: false,
   error: null
 };
-
+     
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGRIDIENTS:
@@ -55,7 +55,7 @@ const reducer = (state = initialState, action) => {
     case SEND_ORDER_ERROR:
       return {...state, error: action.error, isLoading: false, openModal: false};
     case PLACE_ORDER:
-      return { ...state, openModal: true };
+      return { ...state, openModal: true, isLoading: false };
     case CLOSE_MODAL:
       return { ...state, openModal: false };
     case CHANGE_PURCHASING:

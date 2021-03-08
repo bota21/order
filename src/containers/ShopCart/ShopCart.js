@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -43,9 +43,6 @@ const ShopCart = () => {
   const deleteDish = (ingName) => {
     dispatch(removeIngridient(ingName));
   };
-  useEffect(() => {
-    console.log(dishes);
-  }, [dishes]);
 
   if (
     dishes.Pasta === 0 &&
@@ -59,16 +56,18 @@ const ShopCart = () => {
   dishesKeys.forEach((ingKeys) => {
     const amount = dishes[ingKeys];
     for (let i = 0; i < amount; i++) {
-      dishList.push(
-        <ShopCartList
-          key={ingKeys + i}
-          type={ingKeys}
-          title={ingKeys}
-          amount={dishes[ingKeys]}
-          price={PRODUCT_PRICES[ingKeys]}
-          remove={deleteDish}
-        />
-      );
+      if(ingKeys) {
+        dishList.push(
+          <ShopCartList
+            key={ingKeys + i}
+            type={ingKeys}
+            title={ingKeys}
+            amount={dishes[ingKeys]}
+            price={PRODUCT_PRICES[ingKeys]}
+            remove={deleteDish}
+          />
+        );
+      }      
     }
   });
 
@@ -78,6 +77,7 @@ const ShopCart = () => {
   const closeWindow = () => {
     dispatch(closeModal());
   };
+
   return (
     <div className='ShopCart'>
       <Card className={classes.root}>
