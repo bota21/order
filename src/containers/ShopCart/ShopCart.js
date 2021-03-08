@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -11,6 +11,8 @@ import {
   changePurchasing,
   placeOrder,
   closeModal,
+  addToTotal,
+  removeAtTotal,
 } from "../../store/Actions/shopActions";
 import Modal from "../../components/UI/Modal";
 import ContactData from "../ContactData/ContactData";
@@ -44,6 +46,14 @@ const ShopCart = () => {
     dispatch(removeIngridient(ingName));
   };
 
+  useEffect(() => {
+    if (purchasing === false) {
+      dispatch(addToTotal());
+    } else if (purchasing === true && total !== 0) {
+      dispatch(removeAtTotal());
+    } else return;
+  }, [purchasing]);
+
   if (
     dishes.Pasta === 0 &&
     dishes.Caesar === 0 &&
@@ -67,7 +77,7 @@ const ShopCart = () => {
   };
 
   const dishList = productObj(productName, productAmount);
-  console.log(dishList);
+
   const renderList = dishList.map((item) => {
     if (item.amount !== 0) {
       return (
